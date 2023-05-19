@@ -5,7 +5,7 @@
                 <el-card>
                     <div slot="header">
                         Subscription Converter
-                        <svg-icon icon-class="github" style="margin-left: 20px" @click="goToProject" />
+                        <!--<svg-icon icon-class="github" style="margin-left: 20px" @click="goToProject" />-->
 
                         <div style="display: inline-block; position:absolute; right: 20px">{{ backendVersion }}</div>
                     </div>
@@ -32,14 +32,24 @@
 
                             <div v-if="advanced === '2'">
                                 <el-form-item label="后端地址:">
-                                    <el-autocomplete
+<!--                                    <el-autocomplete
                                             style="width: 100%"
                                             v-model="form.customBackend"
                                             :fetch-suggestions="backendSearch"
                                             placeholder="动动小手，（建议）自行搭建后端服务。例：http://127.0.0.1:25500/sub?"
                                     >
                                         <el-button slot="append" @click="gotoGayhub" icon="el-icon-link">前往项目仓库</el-button>
-                                    </el-autocomplete>
+                                    </el-autocomplete>-->
+                                    <el-select
+                                        v-model="form.customBackend"
+                                        allow-create
+                                        filterable
+                                        placeholder="请选择"
+                                        style="width: 100%"
+                                    >
+                                        <el-option v-for="(v, k) in options.customBackend" :key="k" :label="k" :value="v"></el-option>
+                                    </el-select>
+
                                 </el-form-item>
                                 <el-form-item label="远程配置:">
                                     <el-select
@@ -64,13 +74,13 @@
                                         <el-button slot="append" @click="gotoRemoteConfig" icon="el-icon-link">配置示例</el-button>
                                     </el-select>
                                 </el-form-item>
-                                <el-form-item label="Include:">
+                                <el-form-item label="包含节点:">
                                     <el-input v-model="form.includeRemarks" placeholder="节点名包含的关键字，支持正则" />
                                 </el-form-item>
-                                <el-form-item label="Exclude:">
+                                <el-form-item label="排除节点:">
                                     <el-input v-model="form.excludeRemarks" placeholder="节点名不包含的关键字，支持正则" />
                                 </el-form-item>
-                                <el-form-item label="FileName:">
+                                <el-form-item label="订阅名:">
                                     <el-input v-model="form.filename" placeholder="返回的订阅文件名" />
                                 </el-form-item>
                                 <el-form-item label-width="0px">
@@ -305,8 +315,21 @@ export default {
                     ClashR: "clashr",
                     Surge2: "surge&ver=2",
                 },
+                customBackend: {
+                    "localhost:25500 本地版": "http://localhost:25500/sub?",
+                    "sub.id9.cc(品云提供-稳定)": "https://sub.id9.cc/sub?",
+                    "sub.xeton.dev(subconverter作者提供-稳定)":"https://sub.xeton.dev/sub?",
+                    "api.dler.io(lhie1提供-稳定)": "https://api.dler.io/sub?",
+                    "sub.maoxiongnet.com(猫熊提供-稳定)": "https://sub.maoxiongnet.com/sub?"
+                },
                 // todo 是否需要修改后端地址 add by wangzz
-                backendOptions: [{value: "http://127.0.0.1:25500/sub?"}],
+                backendOptions: [
+                    { value: "http://localhost:25500/sub?" },
+                    { value: "https://sub.id9.cc/sub?" },
+                    { value: "https://sub.xeton.dev/sub?" },
+                    { value: "https://api.dler.io/sub?" },
+                    { value: "https://sub.maoxiongnet.com/sub?" }
+                ],
                 // todo 需要修改远程配置地址 add by wangzz
                 remoteConfig: [{
                     label: "ACL4SSR",
