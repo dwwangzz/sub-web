@@ -5,7 +5,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/sub-web/",
     name: "SubConverter",
     component: () => import("../views/Subconverter.vue")
   }
