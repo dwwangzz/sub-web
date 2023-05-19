@@ -5,6 +5,10 @@ function resolve(dir) {
 }
 
 module.exports = {
+
+  // 资源文件增加项目地址，如果不需要加可以直接注释
+  publicPath: process.env.BASE_URL,
+
   css: {
     loaderOptions: {
       less: {
