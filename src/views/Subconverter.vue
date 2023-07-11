@@ -345,6 +345,10 @@ export default {
                             {
                                 label: "[C] Online_Full 全分组",
                                 value: "https://raw.githubusercontent.com/dwwangzz/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_wzz.ini"
+                            },
+                            {
+                                label: "[C] Online_Full 全分组 本地",
+                                value: "rules/ACL4SSR/Clash/config/ACL4SSR_Full_wzz.ini"
                             }
                         ]
                     },
@@ -402,7 +406,12 @@ export default {
                             {
                                 label: "ACL4SSR_Online_Full_Netflix 全分组 重度用户使用 奈飞全量 (与Github同步)",
                                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_Netflix.ini"
-                            },
+                            }
+                        ]
+                    },
+                    {
+                        label: "ACL4SSR 本地",
+                        options: [
                             {
                                 label: "ACL4SSR 本地 默认版 分组比较全",
                                 value: "config/ACL4SSR.ini"
@@ -503,7 +512,8 @@ export default {
                                 value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/special/basic.ini"
                             }
                         ]
-                    }]
+                    }
+                ]
             },
             form: {
                 sourceSubUrl: "",
