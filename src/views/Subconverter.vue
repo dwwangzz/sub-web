@@ -6,7 +6,6 @@
                     <div slot="header">
                         Subscription Converter
                         <!--<svg-icon icon-class="github" style="margin-left: 20px" @click="goToProject" />-->
-
                         <div style="display: inline-block; position:absolute; right: 20px">{{ backendVersion }}</div>
                     </div>
                     <el-container>
@@ -26,28 +25,29 @@
                             </el-form-item>
                             <el-form-item label="客户端:">
                                 <el-select v-model="form.clientType" style="width: 100%">
-                                    <el-option v-for="(v, k) in options.clientTypes" :key="k" :label="k" :value="v"></el-option>
+                                    <el-option v-for="(v, k) in options.clientTypes" :key="k" :label="k"
+                                               :value="v"></el-option>
                                 </el-select>
                             </el-form-item>
 
                             <div v-if="advanced === '2'">
                                 <el-form-item label="后端地址:">
-<!--                                    <el-autocomplete
+                                    <!--<el-autocomplete
                                             style="width: 100%"
                                             v-model="form.customBackend"
                                             :fetch-suggestions="backendSearch"
-                                            placeholder="动动小手，（建议）自行搭建后端服务。例：http://127.0.0.1:25500/sub?"
-                                    >
+                                            placeholder="动动小手，（建议）自行搭建后端服务。例：http://127.0.0.1:25500/sub?">
                                         <el-button slot="append" @click="gotoGayhub" icon="el-icon-link">前往项目仓库</el-button>
                                     </el-autocomplete>-->
                                     <el-select
-                                        v-model="form.customBackend"
-                                        allow-create
-                                        filterable
-                                        placeholder="请选择"
-                                        style="width: 100%"
+                                            v-model="form.customBackend"
+                                            allow-create
+                                            filterable
+                                            placeholder="请选择"
+                                            style="width: 100%"
                                     >
-                                        <el-option v-for="(v, k) in options.customBackend" :key="k" :label="k" :value="v"></el-option>
+                                        <el-option v-for="(v, k) in options.customBackend" :key="k" :label="k"
+                                                   :value="v"></el-option>
                                     </el-select>
 
                                 </el-form-item>
@@ -71,22 +71,26 @@
                                                     :value="item.value"
                                             ></el-option>
                                         </el-option-group>
-                                        <el-button slot="append" @click="gotoRemoteConfig" icon="el-icon-link">配置示例</el-button>
+                                        <el-button slot="append" @click="gotoRemoteConfig" icon="el-icon-link">
+                                            配置示例
+                                        </el-button>
                                     </el-select>
                                 </el-form-item>
                                 <el-form-item label="包含节点:">
-                                    <el-input v-model="form.includeRemarks" placeholder="节点名包含的关键字，支持正则" />
+                                    <el-input v-model="form.includeRemarks" placeholder="节点名包含的关键字，支持正则"/>
                                 </el-form-item>
                                 <el-form-item label="排除节点:">
-                                    <el-input v-model="form.excludeRemarks" placeholder="节点名不包含的关键字，支持正则" />
+                                    <el-input v-model="form.excludeRemarks"
+                                              placeholder="节点名不包含的关键字，支持正则"/>
                                 </el-form-item>
                                 <el-form-item label="订阅名:">
-                                    <el-input v-model="form.filename" placeholder="返回的订阅文件名" />
+                                    <el-input v-model="form.filename" placeholder="返回的订阅文件名"/>
                                 </el-form-item>
                                 <el-form-item label-width="0px">
                                     <el-row type="flex">
                                         <el-col>
-                                            <el-checkbox v-model="form.nodeList" label="输出为 Node List" border></el-checkbox>
+                                            <el-checkbox v-model="form.nodeList" label="输出为 Node List"
+                                                         border></el-checkbox>
                                         </el-col>
                                         <el-popover placement="bottom" v-model="form.extraset">
                                             <el-row>
@@ -96,7 +100,8 @@
                                                 <el-checkbox v-model="form.scv" label="跳过证书验证"></el-checkbox>
                                             </el-row>
                                             <el-row>
-                                                <el-checkbox v-model="form.udp" @change="needUdp = true" label="启用 UDP"></el-checkbox>
+                                                <el-checkbox v-model="form.udp" @change="needUdp = true"
+                                                             label="启用 UDP"></el-checkbox>
                                             </el-row>
                                             <el-row>
                                                 <el-checkbox v-model="form.appendType" label="节点类型"></el-checkbox>
@@ -111,10 +116,12 @@
                                         </el-popover>
                                         <el-popover placement="bottom" style="margin-left: 10px">
                                             <el-row>
-                                                <el-checkbox v-model="form.tpl.surge.doh" label="Surge.DoH"></el-checkbox>
+                                                <el-checkbox v-model="form.tpl.surge.doh"
+                                                             label="Surge.DoH"></el-checkbox>
                                             </el-row>
                                             <el-row>
-                                                <el-checkbox v-model="form.tpl.clash.doh" label="Clash.DoH"></el-checkbox>
+                                                <el-checkbox v-model="form.tpl.clash.doh"
+                                                             label="Clash.DoH"></el-checkbox>
                                             </el-row>
                                             <el-row>
                                                 <el-checkbox v-model="form.insert" label="网易云"></el-checkbox>
@@ -318,134 +325,176 @@ export default {
                 customBackend: {
                     "localhost:25500 本地版": "http://localhost:25500/sub?",
                     "sub.id9.cc(品云提供-稳定)": "https://sub.id9.cc/sub?",
-                    "sub.xeton.dev(subconverter作者提供-稳定)":"https://sub.xeton.dev/sub?",
+                    "sub.xeton.dev(subconverter作者提供-稳定)": "https://sub.xeton.dev/sub?",
                     "api.dler.io(lhie1提供-稳定)": "https://api.dler.io/sub?",
                     "sub.maoxiongnet.com(猫熊提供-稳定)": "https://sub.maoxiongnet.com/sub?"
                 },
                 // todo 是否需要修改后端地址 add by wangzz
                 backendOptions: [
-                    { value: "http://localhost:25500/sub?" },
-                    { value: "https://sub.id9.cc/sub?" },
-                    { value: "https://sub.xeton.dev/sub?" },
-                    { value: "https://api.dler.io/sub?" },
-                    { value: "https://sub.maoxiongnet.com/sub?" }
+                    {value: "http://localhost:25500/sub?"},
+                    {value: "https://sub.id9.cc/sub?"},
+                    {value: "https://sub.xeton.dev/sub?"},
+                    {value: "https://api.dler.io/sub?"},
+                    {value: "https://sub.maoxiongnet.com/sub?"}
                 ],
                 // todo 需要修改远程配置地址 add by wangzz
-                remoteConfig: [{
-                    label: "ACL4SSR",
-                    options: [{
-                        label: "ACL4SSR_Online 默认版 分组比较全 (与Github同步)",
-                        value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini"
-                    }, {
-                        label: "ACL4SSR_Online_AdblockPlus 更多去广告 (与Github同步)",
-                        value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_AdblockPlus.ini"
-                    }, {
-                        label: "ACL4SSR_Online_NoAuto 无自动测速 (与Github同步)",
-                        value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoAuto.ini"
-                    }, {
-                        label: "ACL4SSR_Online_NoReject 无广告拦截规则 (与Github同步)",
-                        value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoReject.ini"
-                    }, {
-                        label: "ACL4SSR_Online_Mini 精简版 (与Github同步)",
-                        value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini.ini"
-                    }, {
-                        label: "ACL4SSR_Online_Mini_AdblockPlus.ini 精简版 更多去广告 (与Github同步)",
-                        value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_AdblockPlus.ini"
-                    }, {
-                        label: "ACL4SSR_Online_Mini_NoAuto.ini 精简版 不带自动测速 (与Github同步)",
-                        value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_NoAuto.ini"
-                    }, {
-                        label: "ACL4SSR_Online_Mini_Fallback.ini 精简版 带故障转移 (与Github同步)",
-                        value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_Fallback.ini"
-                    }, {
-                        label: "ACL4SSR_Online_Mini_MultiMode.ini 精简版 自动测速、故障转移、负载均衡 (与Github同步)",
-                        value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_MultiMode.ini"
-                    }, {
-                        label: "ACL4SSR_Online_Full 全分组 重度用户使用 (与Github同步)",
-                        value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini"
-                    }, {
-                        label: "ACL4SSR_Online_Full_NoAuto.ini 全分组 无自动测速 重度用户使用 (与Github同步)",
-                        value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_NoAuto.ini"
-                    }, {
-                        label: "ACL4SSR_Online_Full_AdblockPlus 全分组 重度用户使用 更多去广告 (与Github同步)",
-                        value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_AdblockPlus.ini"
-                    }, {
-                        label: "ACL4SSR_Online_Full_Netflix 全分组 重度用户使用 奈飞全量 (与Github同步)",
-                        value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_Netflix.ini"
-                    }, {
-                        label: "ACL4SSR 本地 默认版 分组比较全",
-                        value: "config/ACL4SSR.ini"
-                    }, {
-                        label: "ACL4SSR_Mini 本地 精简版",
-                        value: "config/ACL4SSR_Mini.ini"
-                    }, {
-                        label: "ACL4SSR_Mini_NoAuto.ini 本地 精简版+无自动测速",
-                        value: "config/ACL4SSR_Mini_NoAuto.ini"
-                    }, {
-                        label: "ACL4SSR_Mini_Fallback.ini 本地 精简版+fallback",
-                        value: "config/ACL4SSR_Mini_Fallback.ini"
-                    }, {
-                        label: "ACL4SSR_BackCN 本地 回国",
-                        value: "config/ACL4SSR_BackCN.ini"
-                    }, {
-                        label: "ACL4SSR_NoApple 本地 无苹果分流",
-                        value: "config/ACL4SSR_NoApple.ini"
-                    }, {
-                        label: "ACL4SSR_NoAuto 本地 无自动测速 ",
-                        value: "config/ACL4SSR_NoAuto.ini"
-                    }, {
-                        label: "ACL4SSR_NoAuto_NoApple 本地 无自动测速&无苹果分流",
-                        value: "config/ACL4SSR_NoAuto_NoApple.ini"
-                    }, {
-                        label: "ACL4SSR_NoMicrosoft 本地 无微软分流",
-                        value: "config/ACL4SSR_NoMicrosoft.ini"
-                    }, {
-                        label: "ACL4SSR_WithGFW 本地 GFW列表",
-                        value: "config/ACL4SSR_WithGFW.ini"
+                remoteConfig: [
+                    {
+                        label: "ACL4SSR",
+                        options: [
+                            {
+                                label: "ACL4SSR_Online 默认版 分组比较全 (与Github同步)",
+                                value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini"
+                            },
+                            {
+                                label: "ACL4SSR_Online_AdblockPlus 更多去广告 (与Github同步)",
+                                value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_AdblockPlus.ini"
+                            },
+                            {
+                                label: "ACL4SSR_Online_NoAuto 无自动测速 (与Github同步)",
+                                value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoAuto.ini"
+                            },
+                            {
+                                label: "ACL4SSR_Online_NoReject 无广告拦截规则 (与Github同步)",
+                                value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoReject.ini"
+                            },
+                            {
+                                label: "ACL4SSR_Online_Mini 精简版 (与Github同步)",
+                                value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini.ini"
+                            },
+                            {
+                                label: "ACL4SSR_Online_Mini_AdblockPlus.ini 精简版 更多去广告 (与Github同步)",
+                                value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_AdblockPlus.ini"
+                            },
+                            {
+                                label: "ACL4SSR_Online_Mini_NoAuto.ini 精简版 不带自动测速 (与Github同步)",
+                                value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_NoAuto.ini"
+                            },
+                            {
+                                label: "ACL4SSR_Online_Mini_Fallback.ini 精简版 带故障转移 (与Github同步)",
+                                value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_Fallback.ini"
+                            },
+                            {
+                                label: "ACL4SSR_Online_Mini_MultiMode.ini 精简版 自动测速、故障转移、负载均衡 (与Github同步)",
+                                value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_MultiMode.ini"
+                            },
+                            {
+                                label: "ACL4SSR_Online_Full 全分组 重度用户使用 (与Github同步)",
+                                value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini"
+                            },
+                            {
+                                label: "ACL4SSR_Online_Full_NoAuto.ini 全分组 无自动测速 重度用户使用 (与Github同步)",
+                                value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_NoAuto.ini"
+                            },
+                            {
+                                label: "ACL4SSR_Online_Full_AdblockPlus 全分组 重度用户使用 更多去广告 (与Github同步)",
+                                value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_AdblockPlus.ini"
+                            },
+                            {
+                                label: "ACL4SSR_Online_Full_Netflix 全分组 重度用户使用 奈飞全量 (与Github同步)",
+                                value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_Netflix.ini"
+                            },
+                            {
+                                label: "ACL4SSR 本地 默认版 分组比较全",
+                                value: "config/ACL4SSR.ini"
+                            },
+                            {
+                                label: "ACL4SSR_Mini 本地 精简版",
+                                value: "config/ACL4SSR_Mini.ini"
+                            },
+                            {
+                                label: "ACL4SSR_Mini_NoAuto.ini 本地 精简版+无自动测速",
+                                value: "config/ACL4SSR_Mini_NoAuto.ini"
+                            },
+                            {
+                                label: "ACL4SSR_Mini_Fallback.ini 本地 精简版+fallback",
+                                value: "config/ACL4SSR_Mini_Fallback.ini"
+                            },
+                            {
+                                label: "ACL4SSR_BackCN 本地 回国",
+                                value: "config/ACL4SSR_BackCN.ini"
+                            },
+                            {
+                                label: "ACL4SSR_NoApple 本地 无苹果分流",
+                                value: "config/ACL4SSR_NoApple.ini"
+                            },
+                            {
+                                label: "ACL4SSR_NoAuto 本地 无自动测速 ",
+                                value: "config/ACL4SSR_NoAuto.ini"
+                            },
+                            {
+                                label: "ACL4SSR_NoAuto_NoApple 本地 无自动测速&无苹果分流",
+                                value: "config/ACL4SSR_NoAuto_NoApple.ini"
+                            },
+                            {
+                                label: "ACL4SSR_NoMicrosoft 本地 无微软分流",
+                                value: "config/ACL4SSR_NoMicrosoft.ini"
+                            },
+                            {
+                                label: "ACL4SSR_WithGFW 本地 GFW列表",
+                                value: "config/ACL4SSR_WithGFW.ini"
+                            }
+                        ]
+                    },
+                    {
+                        label: "universal",
+                        options: [
+                            {
+                                label: "No-Urltest",
+                                value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/universal/no-urltest.ini"
+                            },
+                            {
+                                label: "Urltest",
+                                value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/universal/urltest.ini"
+                            }
+                        ]
+                    },
+                    {
+                        label: "customized",
+                        options: [
+                            {
+                                label: "Maying",
+                                value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/maying.ini"
+                            },
+                            {
+                                label: "Ytoo",
+                                value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/ytoo.ini"
+                            },
+                            {
+                                label: "FlowerCloud",
+                                value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/flowercloud.ini"
+                            },
+                            {
+                                label: "Nexitally",
+                                value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/nexitally.ini"
+                            },
+                            {
+                                label: "SoCloud",
+                                value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/socloud.ini"
+                            },
+                            {
+                                label: "ARK",
+                                value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/ark.ini"
+                            },
+                            {
+                                label: "ssrCloud",
+                                value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/ssrcloud.ini"
+                            }
+                        ]
+                    },
+                    {
+                        label: "Special",
+                        options: [
+                            {
+                                label: "NeteaseUnblock(仅规则，No-Urltest)",
+                                value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/special/netease.ini"
+                            },
+                            {
+                                label: "Basic(仅GEOIP CN + Final)",
+                                value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/special/basic.ini"
+                            }
+                        ]
                     }]
-                }, {
-                    label: "universal",
-                    options: [{
-                        label: "No-Urltest",
-                        value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/universal/no-urltest.ini"
-                    }, {
-                        label: "Urltest",
-                        value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/universal/urltest.ini"
-                    }]
-                }, {
-                    label: "customized",
-                    options: [{
-                        label: "Maying",
-                        value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/maying.ini"
-                    }, {
-                        label: "Ytoo",
-                        value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/ytoo.ini"
-                    }, {
-                        label: "FlowerCloud",
-                        value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/flowercloud.ini"
-                    }, {
-                        label: "Nexitally",
-                        value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/nexitally.ini"
-                    }, {
-                        label: "SoCloud",
-                        value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/socloud.ini"
-                    }, {
-                        label: "ARK",
-                        value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/ark.ini"
-                    }, {
-                        label: "ssrCloud",
-                        value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/ssrcloud.ini"
-                    }]
-                }, {
-                    label: "Special",
-                    options: [{
-                        label: "NeteaseUnblock(仅规则，No-Urltest)",
-                        value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/special/netease.ini"
-                    }, {
-                        label: "Basic(仅GEOIP CN + Final)",
-                        value: "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/special/basic.ini"
-                    }]
-                }]
             },
             form: {
                 sourceSubUrl: "",
