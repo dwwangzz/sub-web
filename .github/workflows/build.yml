@@ -1,8 +1,8 @@
 name: Build
 
-on:
-  push:
-    branches: [ master ]
+#on:
+#  push:
+#    branches: [ master ]
 
 jobs:
 
@@ -40,7 +40,7 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist
-        branch: gh-pages
+        branch: gh-pages-2
 
 
 
