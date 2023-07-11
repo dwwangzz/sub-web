@@ -340,6 +340,15 @@ export default {
                 // todo 需要修改远程配置地址 add by wangzz
                 remoteConfig: [
                     {
+                        label: "自定义规则[建议使用ACL4SSR]",
+                        options: [
+                            {
+                                label: "[C] Online_Full 全分组",
+                                value: "https://raw.githubusercontent.com/dwwangzz/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_wzz.ini"
+                            }
+                        ]
+                    },
+                    {
                         label: "ACL4SSR",
                         options: [
                             {
