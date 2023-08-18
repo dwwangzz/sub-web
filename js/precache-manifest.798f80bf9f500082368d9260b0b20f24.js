@@ -16,16 +16,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/sub-web/fonts/element-icons.732389de.ttf"
   },
   {
-    "revision": "7c4069dda67bfc9ed232578e04626a04",
+    "revision": "c6ca1b2e906cde29dbe171fafaed811d",
     "url": "/sub-web/index.html"
   },
   {
-    "revision": "2a4f122912d0101d64dc",
-    "url": "/sub-web/js/app.6472bed8.js"
+    "revision": "301a83e4df1f74943dba",
+    "url": "/sub-web/js/app.4e38c9f7.js"
   },
   {
-    "revision": "2d26cade1b1fa17450ed",
-    "url": "/sub-web/js/chunk-3b4ef659.73d807c3.js"
+    "revision": "2f33e9edbec4fb341e07",
+    "url": "/sub-web/js/chunk-3b4ef659.bb192a23.js"
   },
   {
     "revision": "7c7ba93c52ce841f3624",
